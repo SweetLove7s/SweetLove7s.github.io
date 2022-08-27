@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Java刷题笔记</title>
+      <link href="/2022/08/23/articles/Java%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/08/23/articles/Java%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>###try…catch…finally中都有return，返回谁？<br>return语句并不是函数的最终出口，如果有finally语句，这在return之后还会执行finally（return的值会暂存在栈里面，等待finally执行后再返回）</p><p>###while中不能声明变量，也不能用非boolean的数据或表达式</p><p>###String字符串相加的问题<br>如果是”a”+”b”,这样的，在编译的时候会优化成”ab”，可以认为”a”+”b”&#x3D;”ab”  ,而A&#x3D;”a” , B&#x3D;”b” , A+B就不会优化，不相等，而是用语法糖，新建一个StringBuider来处理。</p><p>###default和protected的区别是：<br>前者只要是外部包，就不允许访问。后者只要是子类就允许访问，即使子类位于外部包。总结：default拒绝一切包外访问；protected接受包外的子类访问</p><p>###关于泛型<br>####使用泛型的好处</p><ol><li>类型安全。<br> 泛型的主要目标是提高 Java 程序的类型安全。通过知道使用泛型定义的变量的类型限制，编译器可以在一个高得多的程度上验证类型假设。没有泛型，这些假设就只存在于程序员的头脑中（或者如果幸运的话，还存在于代码注释中）。</li><li>消除强制类型转换。<br> 泛型的一个附带好处是，消除源代码中的许多强制类型转换。这使得代码更加可读，并且减少了出错机会。</li><li>潜在的性能收益。<br>泛型为较大的优化带来可能。在泛型的初始实现中，编译器将强制类型转换（没有泛型的话，程序员会指定这些强制类型转换）插入生成的字节码中。但是更多类型信息可用于编译器这一事实，为未来版本的 JVM 的优化带来可能。由于泛型的实现方式，支持泛型（几乎）不需要 JVM 或类文件更改。所有工作都在编译器中完成，编译器生成类似于没有泛型（和强制类型转换）时所写的代码，只是更能确保类型安全而已。所以泛型只是提高了数据传输安全性，并没有改变程序运行的性</li></ol><p>###关于StringBuffer的长度和空间问题<br>StringBuffer有长度和空间大小之分，默认空间为16，可以在StringBuffer()括号中更改空间大小，也可以用 .capacity()方法获取空间大小，和 .length是不同的</p><p>###关于子类父类的无参构造<br>子类new的时候默认调用父类的无参构造是因为子类的无参构造默认有个super()方法，如果super方法带参则走父类的带参构造方法，但是最大的前提是调用之前会初始化父类的成员变量，如果父类的成员变量也new了，那就先走new，再执行方法。</p><p>###Flush()<br>flush（）函数强制将缓冲区中的字符流、字节流等输出，目的是如果输出流输出到缓冲区完成后，缓冲区并没有填满，那么缓冲区将会一直等待被填满。所以在关闭输出流之前要调用flush（）。</p><p>###Ready()<br>ready()方法用于检查此流是否已准备好被读取。ready()方法是一种非静态方法，只能通过类对象访问，如果尝试使用类名称访问该方法，则会收到错误消息。在检查流的状态时，ready()方法可能会引发异常。IOException：在执行过程中遇到任何输入&#x2F;输出错误时，可能引发此异常。该方法的返回类型为boolean，当存在下一次读取的输入数据且没有阻塞时返回true。否则返回false。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2022/08/22/hello-world/"/>
       <url>/2022/08/22/hello-world/</url>
@@ -11,6 +30,67 @@
         <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java小记</title>
+      <link href="/2022/08/13/articles/Java%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/"/>
+      <url>/2022/08/13/articles/Java%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Boolean所占字节大小"><a href="#Boolean所占字节大小" class="headerlink" title="Boolean所占字节大小"></a>Boolean所占字节大小</h3><p>boolean:在java规范中，没有明确指出boolean的大小。但在《Java虚拟机规范》给出了boolean类型在编译之后都使用int类型来代替，因此是4个字节，但boolean数组会被编译为byte数组中，此时每个boolean类型占1个字节。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>idea小记</title>
+      <link href="/2022/08/11/articles/idea%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/"/>
+      <url>/2022/08/11/articles/idea%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="启动tomcat显示端口被占用"><a href="#启动tomcat显示端口被占用" class="headerlink" title="启动tomcat显示端口被占用"></a>启动tomcat显示端口被占用</h3><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/error-zhanyong.png" alt="image-20220825231646672"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">打开cmd，在命令窗口输入</span><br><span class="line">netstat -aon|findstr xxxx(端口号)</span><br><span class="line">使用taskkill /pid xxx(任务代码) /f</span><br><span class="line">结束进程</span><br></pre></td></tr></table></figure><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/zhanyong-cmd.png" alt="image-20220825231807637"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo博客搭建教程</title>
+      <link href="/2022/07/21/articles/Hexo%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
+      <url>/2022/07/21/articles/Hexo%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Hexo个人博客配置"><a href="#Hexo个人博客配置" class="headerlink" title="Hexo个人博客配置"></a>Hexo个人博客配置</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>1.安装Node.js</p><p>NodeJs官网：<a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a></p><p>下载之前要清楚自己Linux系统是x64还是ARM，不清楚的可以执行如下命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -m</span><br></pre></td></tr></table></figure><p>复制网址，通过<strong>wget</strong>命令下载</p><p>解压：<br><strong>tar xvf</strong> </p><p>进入bin目录查看版本</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node -v</span><br></pre></td></tr></table></figure><p>2.配置环境变量</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">进入/etc执行vi profile，添加</span><br><span class="line">export PATH=$PATH:/usr/local/nodejs/bin</span><br><span class="line">退出后执行</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure><p>3.检查是否配置成功</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/jianchapeizhi.png" alt="image-20220821213321678"></p><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>1.安装git</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install git-core</span><br><span class="line">如果npm下载慢可以切换到淘宝下载源</span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>1.安装hexo</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br><span class="line">或者 </span><br><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>2.初始化</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure><p>3.启动本地服务</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">CTRL+C关闭服务</span><br></pre></td></tr></table></figure><p>4.创建GitHub个人仓库</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注册github账号</span><br><span class="line">创建个人仓库(new repository)，以 用户名.github.io 为仓库名，如：xxxxx.github.io</span><br></pre></td></tr></table></figure><p>5.生成SSH添加到GitHub</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">回到GitHub bash</span><br><span class="line">ssh-keygen -t rsa -C &quot;邮箱地址&quot;     //是GitHub注册的邮箱地址</span><br><span class="line">之后四步回车就行</span><br></pre></td></tr></table></figure><p>6.找到ssh</p><p>在C盘&#x2F;用户&#x2F;用户名&#x2F;.ssh&#x2F;<br>打开 id_rsa.pub<br>只有一串很长的字符，CTRL+A全选，复制</p><p>回到 GitHub<br>点击右上角头像下拉菜单<br>选择 settings<br>找到 SSH &amp; GPG keys<br>打开<br>选择 SSH keys 右边的 new SSH key</p><p>名字随便取，把刚刚复制的字符串粘贴到下面key栏，原封不动粘贴<br>点击左下角 Add SSH key</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">ssh -T git@github.com</span><br><span class="line">测试是否添加成功</span><br><span class="line">在弹出的输入选项中输入 yes</span><br><span class="line">最后出现自己的用户名(GitHub用户名)即成功</span><br></pre></td></tr></table></figure><p>7.生成本地博客</p><p>随意位置创建一个文件夹用于存放hexo本地文件，打开并右击空白处选择git bash here</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init </span><br><span class="line">初始化本地文件（将GitHub上的hexo文件下载到本地）</span><br></pre></td></tr></table></figure><p>如果会卡住，或者显示错误，是连接不上GitHub，自行挂梯子或等待（即使生成了很多文件也没用）</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br><span class="line">启动本地服务 会自动弹出本地地址，输入到浏览器即可本地访问</span><br></pre></td></tr></table></figure><p>8.将博客发布到网络</p><p>打开上一步建的存储hexo本地文件的文件夹，找到 _config.yml 打开<br>找到底部的 deploy代码块，并修改为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/xxxxx/xxxxx.github.io.git</span><br><span class="line">  branch: main</span><br><span class="line">  </span><br><span class="line">  xxxxx为GitHub用户名</span><br><span class="line">  保存并退出</span><br></pre></td></tr></table></figure><p>然后空白右键 git bash here</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line">hexo g</span><br><span class="line">生成本地静态文件</span><br><span class="line"></span><br><span class="line">hexo d</span><br><span class="line">将本地文件提交到github仓库中（第一次需要进行验证）</span><br><span class="line"></span><br><span class="line">打开GitHub -&gt; settings -&gt; Developer settings -&gt; Personal access token</span><br><span class="line">创建一个令牌密钥，名字随意，下面选项全选，并且生成令牌</span><br><span class="line"></span><br><span class="line">在上面 hexo d 命令之后会弹出一个登录框，选择 token 并将token令牌输入，点击登录</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>完成之后即可使用 </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xxxxx.github.io    //xxxxx为GitHub用户名</span><br></pre></td></tr></table></figure><p>访问你的博客了</p><h2 id="Butterfly配置"><a href="#Butterfly配置" class="headerlink" title="Butterfly配置"></a>Butterfly配置</h2><p>hexo的主题配置</p><p><a href="https://butterfly.js.org/posts/21cfbf15/">https://butterfly.js.org/posts/21cfbf15/</a></p><p>butterfly配置的<strong>官方文档</strong>，直接参考即可</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> Nodejs </tag>
+            
+            <tag> git </tag>
+            
+        </tags>
       
     </entry>
     

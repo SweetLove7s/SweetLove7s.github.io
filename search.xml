@@ -36,11 +36,49 @@
     
     
     <entry>
-      <title>Java小记</title>
+      <title>服务器配置</title>
+      <link href="/2022/08/18/articles/ArrayList%E5%8E%9F%E7%90%86/"/>
+      <url>/2022/08/18/articles/ArrayList%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<p>手搓一个简单的arraylist，完整代码如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Shen</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyList</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义一个数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String[] arr;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化大小</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="variable">INIT_SIZE</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyList</span><span class="params">()</span> &#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="title class_">String</span>[INIT_SIZE];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加数据，并且到临界值时触发扩容机制</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value 价值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String value)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= arr.length) &#123;</span><br><span class="line">            grow();</span><br><span class="line">        &#125;</span><br><span class="line">        arr[index++] = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 扩容</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">grow</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> (<span class="type">int</span>)(arr.length*<span class="number">1.5</span>);</span><br><span class="line">        String[] newArray = <span class="keyword">new</span> <span class="title class_">String</span>[size];</span><br><span class="line">        System.arraycopy(arr,<span class="number">0</span>,newArray,<span class="number">0</span>,arr.length);</span><br><span class="line">        arr = newArray;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 指数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> arr[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><pre><code>     原理其实很简单，就是一个有大小的数组，假设为10，当数据满了之后，下一个进来的数据会被搁置，并且触发扩容机制，换一个更大的数组，并把原来的数据copy进去，最后把搁置的数据加进去。（当然源码肯定比这个复杂，还有很多情况需要考虑）</code></pre><p>再来看上面的代码，首先初始化，给了一个初始数组<code>arr</code>，并且给一个初始化大小值<code>INIT_SIZE</code>，和一个下标<code>index</code>用于<code>get</code>方法</p><p>调用构造器初始化数组</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyList</span><span class="params">()</span> &#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="title class_">String</span>[INIT_SIZE];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>再设置一个<code>size</code>方法获取数组大小</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><code>add</code>方法添加数据，并且记录<code>index</code>数组数据量大小</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加数据，并且到临界值时触发扩容机制</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value 价值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String value)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= arr.length) &#123;</span><br><span class="line">            grow();</span><br><span class="line">        &#125;</span><br><span class="line">        arr[index++] = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 扩容</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">grow</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> (<span class="type">int</span>)(arr.length*<span class="number">1.5</span>);</span><br><span class="line">        String[] newArray = <span class="keyword">new</span> <span class="title class_">String</span>[size];</span><br><span class="line">        System.arraycopy(arr,<span class="number">0</span>,newArray,<span class="number">0</span>,arr.length);</span><br><span class="line">        arr = newArray;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>最后设置<code>get</code>方法取值</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 指数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> arr[index];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>boolean所占大小问题</title>
       <link href="/2022/08/13/articles/Java%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/"/>
       <url>/2022/08/13/articles/Java%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/</url>
       
         <content type="html"><![CDATA[<h3 id="Boolean所占字节大小"><a href="#Boolean所占字节大小" class="headerlink" title="Boolean所占字节大小"></a>Boolean所占字节大小</h3><p>boolean:在java规范中，没有明确指出boolean的大小。但在《Java虚拟机规范》给出了boolean类型在编译之后都使用int类型来代替，因此是4个字节，但boolean数组会被编译为byte数组中，此时每个boolean类型占1个字节。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>idea tomcat端口号被占用</title>
+      <link href="/2022/08/11/articles/idea%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/"/>
+      <url>/2022/08/11/articles/idea%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="启动tomcat显示端口被占用"><a href="#启动tomcat显示端口被占用" class="headerlink" title="启动tomcat显示端口被占用"></a>启动tomcat显示端口被占用</h3><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/error-zhanyong.png" alt="image-20220825231646672"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">打开cmd，在命令窗口输入</span><br><span class="line">netstat -aon|findstr xxxx(端口号)</span><br><span class="line">使用taskkill /pid xxx(任务代码) /f</span><br><span class="line">结束进程</span><br></pre></td></tr></table></figure><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/zhanyong-cmd.png" alt="image-20220825231807637"></p>]]></content>
       
       
       
@@ -55,17 +93,17 @@
     
     
     <entry>
-      <title>idea小记</title>
-      <link href="/2022/08/11/articles/idea%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/"/>
-      <url>/2022/08/11/articles/idea%E6%97%A5%E5%B8%B8%E5%B0%8F%E8%AE%B0/</url>
+      <title>方法未定义错误</title>
+      <link href="/2022/08/01/articles/%E5%89%8D%E7%AB%AF%E6%96%B9%E6%B3%95%E6%9C%AA%E5%AE%9A%E4%B9%89%E6%8A%A5%E9%94%99/"/>
+      <url>/2022/08/01/articles/%E5%89%8D%E7%AB%AF%E6%96%B9%E6%B3%95%E6%9C%AA%E5%AE%9A%E4%B9%89%E6%8A%A5%E9%94%99/</url>
       
-        <content type="html"><![CDATA[<h3 id="启动tomcat显示端口被占用"><a href="#启动tomcat显示端口被占用" class="headerlink" title="启动tomcat显示端口被占用"></a>启动tomcat显示端口被占用</h3><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/error-zhanyong.png" alt="image-20220825231646672"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">打开cmd，在命令窗口输入</span><br><span class="line">netstat -aon|findstr xxxx(端口号)</span><br><span class="line">使用taskkill /pid xxx(任务代码) /f</span><br><span class="line">结束进程</span><br></pre></td></tr></table></figure><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/zhanyong-cmd.png" alt="image-20220825231807637"></p>]]></content>
+        <content type="html"><![CDATA[<p>记录一下碰到的bug，由于是小问题，也忘记截图了，就大概说一下</p><p>​我的项目前端是使用html+vue element ui写的，当时前端写了一个注册方法，和axios请求，死活没有用，最后看了一下网页源代码发现根本没有这个方法，可是我明明写了啊，最后发现是Chrome犯病了，清除了一下缓存就好了，太丢人了呜呜呜</p>]]></content>
       
       
       
         <tags>
             
-            <tag> idea </tag>
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -89,6 +127,46 @@
             <tag> Nodejs </tag>
             
             <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GIT使用</title>
+      <link href="/2022/07/21/articles/GIT%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/07/21/articles/GIT%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<p>​版本控制就是对文件的版本控制，要对文件进行修改、提交等操作，首先要知道文件当前在什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p><p><strong>Untracked</strong>:未跟踪,，此文件在文件夹中，但并没有加入到git库,不参与版本控制.通过<code>git add</code>状态变为<code>staged</code></p><p><strong>Unmodify</strong>:文件已经入库,未修改,即版本库中的文件快照内容与文件夹中完全一致.这种类型的文件有两种去处,如果它被修改,而变为<code>Modified</code> .如果使用<code>git rm</code>移出版本库,则成为<code>_untracked</code>文件</p><p><strong>Modified</strong>:文件已修改,仅仅是修改,并没有进行其他的操作.这个文件也有两个去处,通过<code>git add</code>可进入暂存<code>staged</code>状态,使用<code>git checkout</code>则丢弃修改过,返回到<code>unmodify</code>状态,这个<code>git checkout</code>即从库中取出文件,覆盖当前修改!</p><p><strong>Staged</strong>:暂存状态.执行 <code>git commit</code>则将修改同步到库中,这时库中的文件和本地文件又变为一致，文件为<code>unmodify</code>状态.执行<code>git reset HEAD filename</code> 取消暂存,文件状态为<code>Modified</code></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在使用的时候，先<code>add</code>提交到缓存区，再<code>commit</code>提交到本地仓库，再<code>pull</code>拉取远程仓库代码；若是需要提交到远程仓库，则重复上述步骤再执行<code>push</code>，当可以确认当前没有人提交更新过远程仓库，则可以不用<code>pull</code>直接<code>push</code></p><h3 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h3><p>整合到<strong>idea</strong></p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git1.png" alt="image-20220924153627117"></p><p>然后设置账号</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git2.png" alt="image-20220924153747051"></p><p>token可以在账号设置里面设置私人令牌，可以直接登录，github和gitee都可以。</p><p>之后可以直接从仓库拉取代码创建新项目。</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git3.png" alt="image-20220924154047906"></p><p>使用url直接拉取。</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git4.png" alt="image-20220924154436655"></p><p>复制粘贴url</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git5.png" alt="image-20220924154131355"></p><p>或是通过绑定的账号直接拉取指定的仓库代码。</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git6.png" alt="image-20220924154221397"></p><h4 id="更新与提交"><a href="#更新与提交" class="headerlink" title="更新与提交"></a>更新与提交</h4><p>根据上面总结的方式提交与更新，右键项目根目录文件夹</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/git7.png" alt="image-20220924154652739"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mysql插入中文变成两个问号</title>
+      <link href="/2022/07/19/articles/MySQL%E6%8F%92%E5%85%A5%E4%B8%AD%E6%96%87%E5%8F%98%E6%88%90%E9%97%AE%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/07/19/articles/MySQL%E6%8F%92%E5%85%A5%E4%B8%AD%E6%96%87%E5%8F%98%E6%88%90%E9%97%AE%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>​今天碰到一个懵逼的bug，一开始是测试搜索框的模糊搜索功能，后端使用的是mybatisPlus，结果发现英文可以，中文根本搜索不出来，然后插入数据的功能也有问题，中文插入会变成两个问号</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/wenhao.png" alt="img"></p><p>debug测试了一下，发现从前端一直到sql都是中文的，但是一进数据库就变成了问号，查了很多资料，数据库也是UTF-8的。</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/firstJDBC.png" alt="img"></p><p>最后发现是jdbc的url配置的问题，貌似配置顺序也有关，到目前还没有发现完整的解释</p><p><img src="https://sweetlove7-hexo-1312970091.cos.ap-shanghai.myqcloud.com/images/lastJDBC.png" alt="img"></p><p>使用后面一个是可以的，在上面错误之前我也改成过下面这种，只不过顺序没有换，所以目前我还是不知道具体原因</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
             
         </tags>
       
